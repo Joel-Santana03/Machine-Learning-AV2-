@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Loan Prediction</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    </head>
+<body>
+    <h2>Loan Application Form</h2>
+    <form action="/predict" method="post">
+        <label>Gender:</label><br>
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female" required> Female<br><br>
+
+        <label>Married:</label><br>
+        <input type="radio" name="married" value="Yes" required> Yes
+        <input type="radio" name="married" value="No" required> No<br><br>
+
+        <label>Dependents:</label><br>
+        <select name="dependents" required>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br><br>
+
+        <label>Education:</label><br>
+        <input type="radio" name="education" value="Graduate" required> Graduate
+        <input type="radio" name="education" value="Not Graduate" required> Not Graduate<br><br>
+
+        <label>Self Employed:</label><br>
+        <input type="radio" name="self_employed" value="Yes" required> Yes
+        <input type="radio" name="self_employed" value="No" required> No<br><br>
+
+        <label>Applicant Income:</label><br>
+        <input type="text" name="applicant_income" required><br><br>
+
+        <label>Loan Amount:</label><br>
+        <input type="text" name="loan_amount" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

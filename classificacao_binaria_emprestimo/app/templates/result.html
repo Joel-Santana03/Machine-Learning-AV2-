@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+</head>
+<body>
+    <h2>Loan Application Result</h2>
+    <div class="result-container">
+        <p><strong>Status:</strong> {{ result }}</p>
+        <p><strong>Probability:</strong> {{ prob }}</p>
+        
+        {% if result == 'Approved' %}
+            <div class="result-image">
+                <img src="https://th.bing.com/th/id/OIP.Fz-WRs4BF2v70ng5IaT-6gHaE7?rs=1&pid=ImgDetMain" alt="Loan Approved">
+                <p>Aprovado</p>
+            </div>
+        {% else %}
+            <div class="result-image">
+                <img src="https://th.bing.com/th/id/R.5baa5e4d433abdb133c71f5f2e13bd1c?rik=MpBYwLNcJZJ5bQ&riu=http%3a%2f%2f1.bp.blogspot.com%2f-Q-whXPom0IM%2fTZJWpevxn_I%2fAAAAAAAAArQ%2fF3SPQyMKHjE%2fs1600%2flula.jpg&ehk=0ea1yx0YUk85zNuxLER6pk%2b2pQzSQl5xZu6tDMewg18%3d&risl=&pid=ImgRaw&r=0" alt="Loan Rejected">
+                <p>Rejeitado</p>
+            </div>
+        {% endif %}
+        
+        <a href="/">Back to Form</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classificação de Imagens com ml5.js</title>
+  <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div>
+    <h1>Classificação de Imagens</h1>
+    <p>Selecione uma imagem para classificação:</p>
+    <input type="file" id="imageInput" accept="image/*">
+    <div id="imageContainer">
+      <img id="image" src="" alt="Sua imagem" style="max-width: 300px; display: none;">
+    </div>
+    <p id="result">Resultado: </p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

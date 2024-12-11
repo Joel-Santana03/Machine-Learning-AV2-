@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classificação Binária com ml5.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/ml5@0.12.2/dist/ml5.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f9;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #4caf50;
+      font-size: 2rem;
+    }
+
+    input {
+      margin: 10px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #4caf50;
+      border-radius: 5px;
+      width: 150px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+
+    #result {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Classificação Binária</h1>
+  <p>Insira dois valores e clique em "Classificar".</p>
+  <input id="input1" type="number" placeholder="Valor 1">
+  <input id="input2" type="number" placeholder="Valor 2">
+  <br>
+  <button onclick="classify()">Classificar</button>
+  <p id="result"></p>
+
+  <script>
+    // Inicializando o modelo de classificação
+    let classifier;
+
+    // Configuração do modelo
+    const options = {
+      task: "classification",
+      debug: true,
+      outputLabels: ["ClassA", "ClassB"], // Define os rótulos de saída
+    };
+
+    // Criar a rede neural
+    classifier = ml5.neuralNetwork(options);
+
+    // Dados de exemplo para treinamento
+    const trainingData = [
+      { input: [0, 0], output: "ClassA" },
+      { input: [1, 1], output: "ClassB" },
+      { input: [1, 0], output: "ClassA" },
+      { input: [0, 1], output: "ClassB" },
+    ];
+
+    // Adicionar dados ao modelo
+    trainingData.forEach(data => {
+      classifier.addData(data.input, [data.output]); // Use arrays de strings para saída
+    });
+
+    // Normalizar e treinar o modelo
+    classifier.normalizeData();
+    classifier.train({ epochs: 50 }, () => {
+      console.log("Modelo treinado!");
+      document.getElementById("result").innerText = "Modelo pronto para classificar!";
+    });
+
+    // Função de classificação
+    function classify() {
+      const input1 = parseFloat(document.getElementById("input1").value);
+      const input2 = parseFloat(document.getElementById("input2").value);
+
+      if (isNaN(input1) || isNaN(input2)) {
+        document.getElementById("result").innerText = "Por favor, insira valores válidos.";
+        return;
+      }
+
+      const inputs = [input1, input2];
+
+      classifier.classify(inputs, (err, results) => {
+        if (err) {
+          console.error(err);
+          document.getElementById("result").innerText = "Erro ao classificar.";
+          return;
+        }
+        const label = results[0].label;
+        const confidence = (results[0].confidence * 100).toFixed(2);
+        document.getElementById("result").innerText =
+          `Previsão: ${label}, Confiança: ${confidence}%`;
+      });
+    }
+  </script>
+</body>
+</html>

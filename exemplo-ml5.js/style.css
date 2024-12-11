@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  #imageContainer {
+    margin: 20px auto;
+  }
+  
+  #image {
+    max-width: 300px;
+    max-height: 300px;
+    display: block;
+    margin: 0 auto;
+  }
+  
